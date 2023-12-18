@@ -50,7 +50,7 @@ def add_student():
             my_conn.close()
 
 # Flask PUT endpoint
-@app.route('/update/students/data', methods=['PUT'])
+@app.route('/update/students/data/lastname', methods=['PUT'])
 def update_data():
     try:
         # Get data from the request
@@ -79,6 +79,30 @@ def update_data():
     except Exception as e:
         response = {'status': 'error', 'message': str(e)}
         return jsonify(response), 500
+
+@app.route('/delete/data/rollno', methods=['DELETE'])
+def delete_data():
+    try:
+        my_conn = mysql.connector.connect(host="localhost", user="root", password="Mysql@2024", database="mysqltut")
+        # Write data to the MySQL database
+        cursor = my_conn.cursor()
+        data = request.get_json()
+        # Delete data from the MySQL database
+        print(data)
+        delete_query = "DELETE FROM mysqltut.students WHERE  ROLLNO = %s"
+        cursor.execute(delete_query, (data["ROLLNO"],))
+        my_conn.commit()
+
+        if cursor.rowcount > 0:
+            response = {'status': 'success', 'message': 'Data deleted successfully'}
+        else:
+            response = {'status': 'error', 'message': 'Data not found for deletion'}
+        return jsonify(response)
+
+    except Exception as e:
+        response = {'status': 'error', 'message': str(e)}
+        return jsonify(response), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
