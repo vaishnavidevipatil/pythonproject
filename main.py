@@ -49,7 +49,36 @@ def add_student():
         if 'connection' in locals() and my_conn.is_connected():
             my_conn.close()
 
+# Flask PUT endpoint
+@app.route('/update/students/data', methods=['PUT'])
+def update_data():
+    try:
+        # Get data from the request
+        data = request.get_json()
+
+        # Extract parameters from the data
+        print(data)
+        # new_value = data['new_value']
+        # df = pd.DataFrame([data])
+        # print(df)
+
+        # Create a connection object
+        my_conn = mysql.connector.connect(host="localhost", user="root", password="Mysql@2024", database="mysqltut")
+        # Write data to the MySQL database
+        cursor = my_conn.cursor()
+
+        # Update data in the MySQL database
+        update_query = "UPDATE mysqltut.students SET LASTNAME = %s WHERE ROLLNO = %s"
+        cursor.execute(update_query,(data["LASTNAME"], data["ROLLNO"]))
+
+        my_conn.commit()
+
+        response = {'status': 'success', 'message': 'Data updated successfully'}
+        return jsonify(response)
+
+    except Exception as e:
+        response = {'status': 'error', 'message': str(e)}
+        return jsonify(response), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
-
