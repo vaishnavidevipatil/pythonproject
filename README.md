@@ -1,2 +1,2 @@
 # pythonproject
-python mini project
+python RESTFul API project
