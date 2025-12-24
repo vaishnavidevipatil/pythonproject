@@ -1,0 +1,80 @@
+openapi: 3.0.0
+
+info:
+  title: People API
+  version: "1.0"
+
+paths:
+  /people:
+    get:
+      operationId: people.read_all
+      responses:
+        "200":
+          description: OK
+
+    post:
+      operationId: people.create
+      x-body-name: person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - lname
+              properties:
+                fname:
+                  type: string
+                lname:
+                  type: string
+      responses:
+        "201":
+          description: Created
+
+  /people/{lname}:
+    get:
+      operationId: people.read_one
+      parameters:
+        - name: lname
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+
+    put:
+      operationId: people.update
+      x-body-name: person
+      parameters:
+        - name: lname
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fname:
+                  type: string
+      responses:
+        "200":
+          description: Updated
+
+    delete:
+      operationId: people.delete
+      parameters:
+        - name: lname
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted

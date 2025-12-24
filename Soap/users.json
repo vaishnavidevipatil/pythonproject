@@ -1,0 +1,14 @@
+{
+    "9f4b7d5e-9c7a-4a9b-9f0d-9c61e6e4d5a1": {
+        "id": "9f4b7d5e-9c7a-4a9b-9f0d-9c61e6e4d5a1",
+        "name": "Alice",
+        "email": "alice@example.com",
+        "description": "Test user"
+    },
+    "5b9b68e6-d50f-40e3-b974-d1ed3e338a80": {
+        "id": "5b9b68e6-d50f-40e3-b974-d1ed3e338a80",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "description": "Example user"
+    }
+}

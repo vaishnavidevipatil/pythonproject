@@ -1,0 +1,28 @@
+<!-- Zeep simplifies working with SOAP APIs by automatically inspecting WSDL documents to generate the required service and type definitions. With your environment ready, you can now dive into building and interacting with SOAP APIs using Python. -->
+
+install zeep using pip:
+
+```bash
+# Basic installation of Zeep
+pip install zeep
+
+# Add WS-Security support
+pip install zeep[xmlsec]
+
+# Add asyncio support
+pip install zeep[async]
+```
+
+GET STARTED
+As user data is stored in XML format, here is an example SOAP request to get a user by ID:
+
+```xml post request in the body to get response
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:api="api.users">
+  <soapenv:Body>
+    <api:get_user>
+      <api:user_id>123</api:user_id>
+    </api:get_user>
+  </soapenv:Body>
+</soapenv:Envelope>
